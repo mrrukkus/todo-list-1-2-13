@@ -3,9 +3,9 @@ import React from 'react';
 const TasksFilter = () => {
   return (
     <React.Fragment>
-      <ul class="filters">
+      <ul className="filters">
         <li>
-          <button class="selected">All</button>
+          <button className="selected">All</button>
         </li>
         <li>
           <button>Active</button>

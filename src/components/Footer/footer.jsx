@@ -4,10 +4,10 @@ import TasksFilter from '../TasksFilter/tasks-filter.jsx';
 const Footer = () => {
   return (
     <React.Fragment>
-      <footer class="footer">
-        <span class="todo-count">1 items left</span>
+      <footer className="footer">
+        <span className="todo-count">1 items left</span>
         <TasksFilter/>
-        <button class="clear-completed">Clear completed</button>
+        <button className="clear-completed">Clear completed</button>
       </footer>
     </React.Fragment>
   )
