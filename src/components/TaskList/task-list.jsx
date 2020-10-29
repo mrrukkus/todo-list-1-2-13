@@ -1,19 +1,17 @@
 import Task from '../Task/task.jsx';
 
-const tasksStateList = ["completed", "editing", "view"];
-
-const getTasks = () => {
+const getTasks = (todoData, deleteTask) => {
   return (
-    tasksStateList.map((taskState, i) =>
-      <Task taskState={taskState} key={i}/>
+    todoData.map((task, i) =>
+      <Task task={task} deleteTask={deleteTask} key={i}/>
     )
   );
 };
 
-const TaskList = () => {
+const TaskList = ({ todoData, deleteTask }) => {
   return (
     <ul className="todo-list">
-      {getTasks()}
+      {getTasks(todoData, deleteTask)}
     </ul>
   )
 };
