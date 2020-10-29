@@ -22,7 +22,7 @@ export default class Task extends Component {
   }
 
   render() {
-    const {task} = this.props;
+    const { task, deleteTask } = this.props;
 
     const getTaskClassName = () => {
       if (this.state.isDone) {
@@ -33,10 +33,8 @@ export default class Task extends Component {
       return ``;
     };
 
-    console.log(getTaskClassName());
     const editInput = this.state.isEdit && (
-      <input type="text" className="edit" defaultValue={task.description}/>
-      )
+      <input type="text" className="edit" defaultValue={task.description}/>)
 
     return (
       <li className={getTaskClassName()}>
@@ -47,7 +45,9 @@ export default class Task extends Component {
             <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
           </label>
           <button className="icon icon-edit"></button>
-          <button className="icon icon-destroy"></button>
+          <button className="icon icon-destroy" onClick={() => {
+            deleteTask(task.id);
+          }}></button>
         </div>
         {editInput}
       </li>

@@ -1,17 +1,17 @@
 import Task from '../Task/task.jsx';
 
-const getTasks = (todoData) => {
+const getTasks = (todoData, deleteTask) => {
   return (
     todoData.map((task, i) =>
-      <Task task={task} key={i}/>
+      <Task task={task} deleteTask={deleteTask} key={i}/>
     )
   );
 };
 
-const TaskList = ({todoData}) => {
+const TaskList = ({ todoData, deleteTask }) => {
   return (
     <ul className="todo-list">
-      {getTasks(todoData)}
+      {getTasks(todoData, deleteTask)}
     </ul>
   )
 };
