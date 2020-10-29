@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 export default class Task extends Component {
-  constructor() {
+  constructor({task}) {
     super();
 
     this.state = {
-      isDone: false,
+      isDone: task.isDone,
       isEdit: false
     };
 
@@ -22,6 +22,8 @@ export default class Task extends Component {
   }
 
   render() {
+    const {task} = this.props;
+
     const getTaskClassName = () => {
       if (this.state.isDone) {
         return `completed`
@@ -32,9 +34,8 @@ export default class Task extends Component {
     };
 
     console.log(getTaskClassName());
-    const taskDescription = this.state.isDone ? "Completed" : "Active";
     const editInput = this.state.isEdit && (
-      <input type="text" className="edit" defaultValue="Editing task"/>
+      <input type="text" className="edit" defaultValue={task.description}/>
       )
 
     return (
@@ -42,7 +43,7 @@ export default class Task extends Component {
         <div className="view">
           <input className="toggle" type="checkbox" onClick={this.onCheckboxClick}/>
           <label>
-            <span className="description">{taskDescription} task</span>
+            <span className="description">{task.description}</span>
             <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
           </label>
           <button className="icon icon-edit"></button>
