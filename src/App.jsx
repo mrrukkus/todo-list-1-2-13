@@ -4,6 +4,8 @@ import TaskList from './components/TaskList/task-list.jsx';
 import Footer from './components/Footer/footer.jsx';
 
 export default class App extends Component {
+  maxId = 100;
+
   state = {
     todoData: [
       {description: "Completed task", isDone: true, id: 1},
@@ -27,13 +29,34 @@ export default class App extends Component {
     });
   }
 
+  addTask = (evt) => {
+    if (evt.key === "Enter") {
+      const newTask = {
+        description: evt.target.value,
+        isDone: false,
+        id: this.maxId++
+      };
+
+      this.setState(({ todoData }) => {
+        const newTodoData = [
+          ...todoData,
+          newTask
+        ];
+
+        return {
+          todoData: newTodoData
+        };
+      });
+    }
+  }
+
   render() {
     const {todoData} = this.state;
     return (
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <NewTaskForm/>
+          <NewTaskForm addTask={this.addTask}/>
         </header>
         <section className="main">
           <TaskList todoData={todoData} deleteTask={this.deleteTask}/>

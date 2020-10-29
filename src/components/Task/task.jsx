@@ -23,23 +23,24 @@ export default class Task extends Component {
 
   render() {
     const { task, deleteTask } = this.props;
+    const { isDone, isEdit } = this.state;
 
     const getTaskClassName = () => {
-      if (this.state.isDone) {
+      if (isDone) {
         return `completed`
-      } else if (this.state.isEdit) {
+      } else if (isEdit) {
         return `editing`
       }
       return ``;
     };
 
-    const editInput = this.state.isEdit && (
+    const editInput = isEdit && (
       <input type="text" className="edit" defaultValue={task.description}/>)
 
     return (
       <li className={getTaskClassName()}>
         <div className="view">
-          <input className="toggle" type="checkbox" onClick={this.onCheckboxClick}/>
+          <input className="toggle" type="checkbox" onClick={this.onCheckboxClick} defaultChecked={isDone === true}/>
           <label>
             <span className="description">{task.description}</span>
             <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
