@@ -29,25 +29,23 @@ export default class App extends Component {
     });
   }
 
-  addTask = (evt) => {
-    if (evt.key === "Enter") {
-      const newTask = {
-        description: evt.target.value,
-        isDone: false,
-        id: this.maxId++
+  addTask = (description) => {
+    const newTask = {
+      description: description,
+      isDone: false,
+      id: this.maxId++
+    };
+
+    this.setState(({ todoData }) => {
+      const newTodoData = [
+        ...todoData,
+        newTask
+      ];
+
+      return {
+        todoData: newTodoData
       };
-
-      this.setState(({ todoData }) => {
-        const newTodoData = [
-          ...todoData,
-          newTask
-        ];
-
-        return {
-          todoData: newTodoData
-        };
-      });
-    }
+    });
   }
 
   render() {
