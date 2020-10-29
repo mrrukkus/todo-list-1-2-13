@@ -1,3 +1,5 @@
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 const Task = ({taskState}) => {
   switch (taskState) {
     case ("completed"):
@@ -8,7 +10,7 @@ const Task = ({taskState}) => {
               <input className="toggle" type="checkbox"/>
               <label>
                 <span className="description">Completed task</span>
-                <span className="created">created 17 seconds ago</span>
+                <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
               </label>
               <button className="icon icon-edit"></button>
               <button className="icon icon-destroy"></button>
@@ -24,7 +26,7 @@ const Task = ({taskState}) => {
               <input className="toggle" type="checkbox"/>
               <label>
                 <span className="description">Editing task</span>
-                <span className="created">created 5 minutes ago</span>
+                <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
               </label>
               <button className="icon icon-edit"></button>
               <button className="icon icon-destroy"></button>
@@ -40,7 +42,7 @@ const Task = ({taskState}) => {
             <input className="toggle" type="checkbox"/>
             <label>
               <span className="description">Active task</span>
-              <span className="created">created 5 minutes ago</span>
+              <span className="created">{formatDistanceToNow(new Date(2020, 9, 29), { includeSeconds: true, addSuffix: true })}</span>
             </label>
             <button className="icon icon-edit"></button>
             <button className="icon icon-destroy"></button>
