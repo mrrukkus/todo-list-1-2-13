@@ -63,9 +63,17 @@ export default class App extends Component {
     });
   }
 
-  onToggleDone = (evt, id) => {
-    // evt.preventDefault();
+  clearCompleted = () => {
+    this.setState(({ todoData }) => {
+      const newTodoData = todoData.filter((task) => task.isDone !== true);
 
+      return {
+        todoData: newTodoData
+      };
+    });
+  }
+
+  onToggleDone = (id) => {
     this.setState(({ todoData }) => {
       const taskIndex = todoData.findIndex((task) => task.id === id);
 
@@ -100,7 +108,7 @@ export default class App extends Component {
         </header>
         <section className="main">
           <TaskList todoData={getFilteredTasks(todoData, filterTasks)} deleteTask={this.deleteTask} onToggleDone={this.onToggleDone}/>
-          <Footer setFilterTasks={this.setFilterTasks} filterTasks={filterTasks}/>
+          <Footer setFilterTasks={this.setFilterTasks} filterTasks={filterTasks} clearCompleted={this.clearCompleted}/>
         </section>
       </section>
     );

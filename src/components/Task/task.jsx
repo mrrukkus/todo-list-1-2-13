@@ -26,7 +26,7 @@ export default class Task extends Component {
       <li className={getTaskClassName()}>
         <div className="view">
           <input className="toggle" type="checkbox" onClick={(evt) => {
-            onToggleDone(evt, task.id)}} checked={task.isDone === true} readOnly/>
+            onToggleDone(task.id)}} checked={task.isDone === true} readOnly/>
           <label>
             <span className="description">{task.description}</span>
             <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
