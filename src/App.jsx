@@ -2,6 +2,20 @@ import {Component} from 'react';
 import NewTaskForm from './components/NewTaskForm/new-task-form.jsx';
 import TaskList from './components/TaskList/task-list.jsx';
 import Footer from './components/Footer/footer.jsx';
+import {FiltersList} from './components/TasksFilter/tasks-filter.jsx';
+
+const getFilteredTasks = (tasks, filter) => {
+  switch (filter) {
+    case FiltersList.Active:
+      return tasks.filter(task => task.isDone === false)
+    case FiltersList.Completed:
+      return tasks.filter(task => task.isDone === true)
+    case FiltersList.All:
+      return tasks
+    default:
+      return null;
+    }
+};
 
 export default class App extends Component {
   maxId = 100;
@@ -12,6 +26,7 @@ export default class App extends Component {
       {description: "Editing task", isDone: false, id: 2},
       {description: "Active task", isDone: false, id: 3}
     ],
+    filterTasks: FiltersList.All
   }
 
   deleteTask = (id) => {
@@ -48,8 +63,35 @@ export default class App extends Component {
     });
   }
 
+  onToggleDone = (evt, id) => {
+    // evt.preventDefault();
+
+    this.setState(({ todoData }) => {
+      const taskIndex = todoData.findIndex((task) => task.id === id);
+
+      const oldTask = todoData[taskIndex];
+      const newItem = {...oldTask, isDone: !oldTask.isDone};
+
+      const newTodoData = [
+        ...todoData.slice(0, taskIndex),
+        newItem,
+        ...todoData.slice(taskIndex + 1)
+      ];
+
+      return {
+        todoData: newTodoData
+      }
+    })
+  }
+
+  setFilterTasks = (evt) => {
+    this.setState({
+      filterTasks: evt.target.innerText
+    })
+  }
+
   render() {
-    const {todoData} = this.state;
+    const {todoData, filterTasks} = this.state;
     return (
       <section className="todoapp">
         <header className="header">
@@ -57,8 +99,8 @@ export default class App extends Component {
           <NewTaskForm addTask={this.addTask}/>
         </header>
         <section className="main">
-          <TaskList todoData={todoData} deleteTask={this.deleteTask}/>
-          <Footer/>
+          <TaskList todoData={getFilteredTasks(todoData, filterTasks)} deleteTask={this.deleteTask} onToggleDone={this.onToggleDone}/>
+          <Footer setFilterTasks={this.setFilterTasks} filterTasks={filterTasks}/>
         </section>
       </section>
     );
