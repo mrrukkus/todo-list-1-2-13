@@ -100,6 +100,9 @@ export default class App extends Component {
 
   render() {
     const {todoData, filterTasks} = this.state;
+
+    const activeTasksCount = todoData.filter((task) => task.isDone === false).length;
+
     return (
       <section className="todoapp">
         <header className="header">
@@ -108,7 +111,7 @@ export default class App extends Component {
         </header>
         <section className="main">
           <TaskList todoData={getFilteredTasks(todoData, filterTasks)} deleteTask={this.deleteTask} onToggleDone={this.onToggleDone}/>
-          <Footer setFilterTasks={this.setFilterTasks} filterTasks={filterTasks} clearCompleted={this.clearCompleted}/>
+          <Footer setFilterTasks={this.setFilterTasks} filterTasks={filterTasks} clearCompleted={this.clearCompleted} activeTasksCount={activeTasksCount}/>
         </section>
       </section>
     );
