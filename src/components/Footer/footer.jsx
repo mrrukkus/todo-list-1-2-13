@@ -1,17 +1,19 @@
 import React from 'react';
-import TasksFilter from '../TasksFilter/tasks-filter.jsx';
 import PropTypes from 'prop-types';
+import TasksFilter from '../TasksFilter/tasks-filter';
 
 const Footer = ({ setFilterTasks, currentFilterTasksValue, clearCompleted, activeTasksCount }) => {
   return (
-    <React.Fragment>
+    <>
       <footer className="footer">
         <span className="todo-count">{activeTasksCount} items left</span>
-        <TasksFilter setFilterTasks={setFilterTasks} currentFilterTasksValue={currentFilterTasksValue}/>
-        <button className="clear-completed" onClick={clearCompleted}>Clear completed</button>
+        <TasksFilter setFilterTasks={setFilterTasks} currentFilterTasksValue={currentFilterTasksValue} />
+        <button type="button" className="clear-completed" onClick={clearCompleted}>
+          Clear completed
+        </button>
       </footer>
-    </React.Fragment>
-  )
+    </>
+  );
 };
 
 Footer.propTypes = {
