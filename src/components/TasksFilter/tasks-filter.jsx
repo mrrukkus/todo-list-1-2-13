@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FiltersList = {
   "All": "All",
@@ -24,6 +25,11 @@ const TasksFilter = ({ setFilterTasks, currentFilterTasksValue }) => {
       </ul>
     </React.Fragment>
   )
+};
+
+TasksFilter.propTypes = {
+  setFilterTasks: PropTypes.func.isRequired,
+  currentFilterTasksValue: PropTypes.string.isRequired
 };
 
 export default TasksFilter;

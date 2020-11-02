@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import PropTypes from 'prop-types';
 
 export default class Task extends Component {
   static defaultProps = {
@@ -45,4 +46,10 @@ export default class Task extends Component {
       </li>
     )
   }
-}
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  deleteTask: PropTypes.func,
+  onToggleDone: PropTypes.func
+};
