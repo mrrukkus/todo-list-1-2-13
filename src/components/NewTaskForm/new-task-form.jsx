@@ -17,6 +17,11 @@ export default class NewTaskForm extends Component {
     const { inputValue } = this.state;
 
     if (evt.key === "Enter") {
+      if (inputValue.length === 0) {
+        alert(`Введите содержимое задачи`);
+        return null;
+      }
+
       addTask(inputValue);
       this.setState({
         inputValue: ""
