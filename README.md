@@ -1,1 +1,3 @@
-Репозиторий для задачи JM React 1-12-13. Создан через create-react-app. Запускается через npm start.
+Репозиторий для задач JM React. Создан через create-react-app. Запускается через npm start.
+
+Production ссылка на Vercel https://jm-react.vercel.app/
