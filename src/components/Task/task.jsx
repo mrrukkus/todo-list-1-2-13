@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import PropTypes from 'prop-types';
 
 export default class Task extends Component {
+  static defaultProps = {
+    deleteTask: () => {},
+    onToggleDone: () => {},
+  };
+
   state = {
     isEdit: false
   };
@@ -29,7 +35,7 @@ export default class Task extends Component {
             onToggleDone(task.id)}} checked={task.isDone === true} readOnly/>
           <label>
             <span className="description">{task.description}</span>
-            <span className="created">{formatDistanceToNow(new Date(2020, 6, 2), { includeSeconds: true, addSuffix: true })}</span>
+            <span className="created">{formatDistanceToNow(new Date(task.creationDate), { includeSeconds: true })}</span>
           </label>
           <button className="icon icon-edit"></button>
           <button className="icon icon-destroy" onClick={() => {
@@ -40,4 +46,10 @@ export default class Task extends Component {
       </li>
     )
   }
-}
+};
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  deleteTask: PropTypes.func,
+  onToggleDone: PropTypes.func
+};
