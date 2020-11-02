@@ -16,11 +16,11 @@ const getFilters = (setFilterTasks, filterTasks) => {
   )
 }
 
-const TasksFilter = ({ setFilterTasks, filterTasks }) => {
+const TasksFilter = ({ setFilterTasks, currentFilterTasksValue }) => {
   return (
     <React.Fragment>
       <ul className="filters">
-        {getFilters(setFilterTasks, filterTasks)}
+        {getFilters(setFilterTasks, currentFilterTasksValue)}
       </ul>
     </React.Fragment>
   )

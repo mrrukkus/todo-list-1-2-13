@@ -22,11 +22,11 @@ export default class App extends Component {
 
   state = {
     todoData: [
-      {description: "Completed task", isDone: true, id: 1},
-      {description: "Editing task", isDone: false, id: 2},
-      {description: "Active task", isDone: false, id: 3}
+      {description: "Completed task", isDone: true, creationDate: "Mon Nov 02 2020 10:49:51 GMT+0500", id: 1},
+      {description: "Editing task", isDone: false, creationDate: "Mon Nov 02 2020 10:49:51 GMT+0500", id: 2},
+      {description: "Active task", isDone: false, creationDate: "Mon Nov 02 2020 10:49:51 GMT+0500", id: 3}
     ],
-    filterTasks: FiltersList.All
+    currentFilterTasksValue: FiltersList.All
   }
 
   deleteTask = (id) => {
@@ -48,7 +48,8 @@ export default class App extends Component {
     const newTask = {
       description: description,
       isDone: false,
-      id: this.maxId++
+      id: this.maxId++,
+      creationDate: new Date()
     };
 
     this.setState(({ todoData }) => {
@@ -94,12 +95,12 @@ export default class App extends Component {
 
   setFilterTasks = (evt) => {
     this.setState({
-      filterTasks: evt.target.innerText
+      currentFilterTasksValue: evt.target.innerText
     })
   }
 
   render() {
-    const {todoData, filterTasks} = this.state;
+    const {todoData, currentFilterTasksValue} = this.state;
 
     const activeTasksCount = todoData.filter((task) => task.isDone === false).length;
 
@@ -110,8 +111,8 @@ export default class App extends Component {
           <NewTaskForm addTask={this.addTask}/>
         </header>
         <section className="main">
-          <TaskList todoData={getFilteredTasks(todoData, filterTasks)} deleteTask={this.deleteTask} onToggleDone={this.onToggleDone}/>
-          <Footer setFilterTasks={this.setFilterTasks} filterTasks={filterTasks} clearCompleted={this.clearCompleted} activeTasksCount={activeTasksCount}/>
+          <TaskList todoData={getFilteredTasks(todoData, currentFilterTasksValue)} deleteTask={this.deleteTask} onToggleDone={this.onToggleDone}/>
+          <Footer setFilterTasks={this.setFilterTasks} currentFilterTasksValue={currentFilterTasksValue} clearCompleted={this.clearCompleted} activeTasksCount={activeTasksCount}/>
         </section>
       </section>
     );
