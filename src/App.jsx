@@ -20,9 +20,9 @@ const getFilteredTasks = (tasks, filter) => {
 export default class App extends Component {
   state = {
     todoData: [
-      { description: 'Completed task', isDone: true, creationDate: 'Mon Nov 02 2020 10:49:51 GMT+0500', id: 1 },
-      { description: 'Editing task', isDone: false, creationDate: 'Mon Nov 02 2020 10:49:51 GMT+0500', id: 2 },
-      { description: 'Active task', isDone: false, creationDate: 'Mon Nov 02 2020 10:49:51 GMT+0500', id: 3 },
+      { description: 'Completed task', isDone: true, creationDate: 'Mon Nov 02 2020 10:49:51 GMT+0500', timerCount: 3, id: 1 },
+      { description: 'Editing task', isDone: false, creationDate: 'Mon Nov 02 2020 10:49:51 GMT+0500', timerCount: 3, id: 2 },
+      { description: 'Active task', isDone: false, creationDate: 'Mon Nov 02 2020 10:49:51 GMT+0500', timerCount: 3, id: 3 },
     ],
     currentFilterTasksValue: FiltersList.All,
   };
@@ -39,9 +39,10 @@ export default class App extends Component {
     });
   };
 
-  addTask = (description) => {
+  addTask = (description, timerCount) => {
     const newTask = {
       description,
+      timerCount,
       isDone: false,
       id: Math.floor(Math.random() * 100),
       creationDate: new Date(),
