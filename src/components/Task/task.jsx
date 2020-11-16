@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import PropTypes from 'prop-types';
 
 const Task = ({ task, deleteTask, onToggleDone }) => {
   const [isEdit] = useState(false);
   const [timerCounter, setTimerCounter] = useState(task.timerCount);
-  const [timer, setTimer] = useState(null);
-
+  const [timerRuns, setTimerRuns] = useState(false);
   const isDisabled = timerCounter === 0;
   const editInput = isEdit && <input type="text" className="edit" defaultValue={task.description} />;
 
-  const timerPause = () => {
-    clearInterval(timer);
-    setTimer(null);
-  }
+  const timerPause = useCallback(() => {
+    setTimerRuns(false);
+  }, []);
 
   const timerStart = () => {
-    if (timer === null) {
-      const timerId = setInterval(() => {
+    setTimerRuns(true);
+  };
 
-        const newCount = timerCounter - 1;
-        setTimerCounter(newCount);
-
-        if (newCount <= 0) {
-          timerPause();
-        }
-      }, 1000);
-
-      setTimer(timerId);
+  useEffect(() => {
+    if (!timerRuns) {
+      return null
     }
-  }
+    if (timerCounter <= 0) {
+      timerPause();
+      setTimerRuns(false);
+    }
+    const interval = setInterval(() => {
+      const newCount = timerCounter - 1;
+      setTimerCounter(newCount);
+
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timerCounter, timerRuns, timerPause])
 
   const getTimerValue = () => {
     const min = Math.floor(timerCounter < 60 ? 0 : timerCounter/60);
